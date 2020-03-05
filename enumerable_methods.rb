@@ -1,5 +1,4 @@
 module Enumerable
-
   def my_each
     length.times do |i|
       yield self[i] if block_given?
@@ -8,28 +7,35 @@ module Enumerable
 
   def my_each_with_index
     length.times do |i|
-        yield self[i], i if block_given?
+      yield self[i], i if block_given?
     end
   end
 
   def my_select
     new_array = []
-    self.my_each do |value|
-        new_array << value if yield value
+    my_each do |value|
+      new_array << value if yield value
     end
     new_array
   end
 
   def my_all?
-    is_all_true = false
-    self.my_each do |value|
-        is_all_true = true if yield value
+    is_all_true = true
+    my_each do |value|
+      is_all_true = false unless yield value
     end
     is_all_true
   end
 
-  #[2, 3, 4].my_each_with_index { |x, y| puts "#{x * 2} #{y + 1}" }
+  def my_any?
+    is_all_true = false
+    my_each do |value|
+      is_all_true = true if yield value
+    end
+    is_all_true
+  end
 
- puts ["Hui", "Jopa", "Govno"].my_all? { |x| x.length <= 5 }
+  # [2, 3, 4].my_each_with_index { |x, y| puts "#{x * 2} #{y + 1}" }
 
+  puts [2, 3, 4].my_all? { |x| x > 1 }
 end
