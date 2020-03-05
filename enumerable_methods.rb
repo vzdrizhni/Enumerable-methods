@@ -20,8 +20,16 @@ module Enumerable
     new_array
   end
 
+  def my_all?
+    is_all_true = false
+    self.my_each do |value|
+        is_all_true = true if yield value
+    end
+    is_all_true
+  end
+
   #[2, 3, 4].my_each_with_index { |x, y| puts "#{x * 2} #{y + 1}" }
 
- puts [2, 3, 4].my_select { |x| x == 4 }
+ puts ["Hui", "Jopa", "Govno"].my_all? { |x| x.length <= 5 }
 
 end
