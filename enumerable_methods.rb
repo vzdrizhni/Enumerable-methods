@@ -37,5 +37,5 @@ module Enumerable
 
   # [2, 3, 4].my_each_with_index { |x, y| puts "#{x * 2} #{y + 1}" }
 
-  puts [2, 3, 4].my_all? { |x| x > 1 }
+  puts [2, 3, 4].my_any? { |x| x > 3 }
 end
