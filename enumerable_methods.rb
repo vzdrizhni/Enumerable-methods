@@ -51,12 +51,18 @@ module Enumerable
     counter
   end
 
-  
+  def my_map
+    new_array = []
+    my_each do |value|
+      new_array << yield(value)
+    end
+    new_array
+  end
 
   # [2, 3, 4].my_each_with_index { |x, y| puts "#{x * 2} #{y + 1}" }
 
   #puts [2, 3, 4].my_none? { |x| x > 1 }
 
-  puts [2, 3, 4].my_count {|x| x % 2 == 0}
+  puts [2, 3, 4].my_map{|x| x * 2}
 
 end
