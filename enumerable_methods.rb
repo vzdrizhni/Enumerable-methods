@@ -43,7 +43,20 @@ module Enumerable
     is_all_true
   end
 
+  def my_count
+    counter = 0
+    my_each do |value|
+      counter += 1 if yield value if block_given?
+    end
+    counter
+  end
+
+  
+
   # [2, 3, 4].my_each_with_index { |x, y| puts "#{x * 2} #{y + 1}" }
 
-  puts [2, 3, 4].my_none? { |x| x > 1 }
+  #puts [2, 3, 4].my_none? { |x| x > 1 }
+
+  puts [2, 3, 4].my_count {|x| x % 2 == 0}
+
 end
