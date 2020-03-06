@@ -35,7 +35,15 @@ module Enumerable
     is_all_true
   end
 
+  def my_none?
+    is_all_true = true
+    my_each do |value|
+      is_all_true = false if yield value
+    end
+    is_all_true
+  end
+
   # [2, 3, 4].my_each_with_index { |x, y| puts "#{x * 2} #{y + 1}" }
 
-  puts [2, 3, 4].my_any? { |x| x > 3 }
+  puts [2, 3, 4].my_none? { |x| x > 1 }
 end
