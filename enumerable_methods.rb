@@ -1,15 +1,15 @@
 module Enumerable
   def my_each
-    length.times do |i|
+    self.length.times do |i|
       yield self[i] if block_given?
     end
   end
 
-  def my_each_with_index
+  def my_each_with_index    
     length.times do |i|
       yield self[i], i if block_given?
-    end
-  end
+    end    
+  end  
 
   def my_select
     new_array = []
@@ -59,10 +59,17 @@ module Enumerable
     new_array
   end
 
-  # [2, 3, 4].my_each_with_index { |x, y| puts "#{x * 2} #{y + 1}" }
+  def my_inject    
+    arr = self.drop(1)
+    counter = self[0]
+    i = 0    
+    while i < arr.length do      
+      counter = yield(counter, arr[i])
+      i += 1
+    end
+    counter
+  end 
 
-  #puts [2, 3, 4].my_none? { |x| x > 1 }
-
-  puts [2, 3, 4].my_map{|x| x * 2}
+  puts [2, 3, 4].my_inject { |x, y| x + y } 
 
 end
