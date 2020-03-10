@@ -1,13 +1,15 @@
 module Enumerable
   def my_each
-    return enum_for(:each) unless block_given?
+    return enum_for(:my_each) unless block_given?
     self.size.times do |i|      
       yield self.to_a[i]      
     end
-  end  
+  end 
+
+  #p (2..4).my_each
 
   def my_each_with_index
-    return enum_for(:each_with_index) unless block_given?
+    return enum_for(:my_each_with_index) unless block_given?
     length.times do |i|
       yield self.to_a[i], i if block_given?
     end    
@@ -65,9 +67,14 @@ module Enumerable
 
   #p [2, 4, 3].select
 
-  def my_inject    
-    arr = self.drop(1)
-    counter = self.to_a[0]
+  def my_inject(acc = nil)
+    if acc == nil 
+      arr = self.drop(1)
+      counter = self.to_a[0]
+    else
+      counter = acc
+      arr = self.to_a
+    end
     i = 0    
     while i < arr.length do      
       counter = yield(counter, arr.to_a[i])
@@ -76,6 +83,6 @@ module Enumerable
     counter
   end 
 
-  puts (2..4).my_inject { |x, y| x * y } 
+  puts (2..4).my_inject(2) { |x, y| x + y }  
 
 end
