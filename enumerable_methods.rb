@@ -28,25 +28,23 @@ module Enumerable
       block_given? ? (is_all_true = false unless yield value) : (is_all_true = false unless value == arg)
     end
     is_all_true
-  end
+  end  
 
-  p [].my_all?
-
-  def my_any?
+  def my_any?(arg = nil)
     is_all_true = false
     my_each do |value|
-      is_all_true = true if yield value
+      block_given? ? (is_all_true = true if yield value) : (is_all_true = true if value == arg)
     end
     is_all_true
-  end
+  end  
 
-  def my_none?
+  def my_none?(arg = true)
     is_all_true = true
     my_each do |value|
-      is_all_true = false if yield value
+      block_given? ? (is_all_true = false if yield value) : (is_all_true = false if value == arg || value.class == arg || value == true)
     end
     is_all_true
-  end
+  end   
 
   def my_count
     counter = 0
@@ -63,9 +61,7 @@ module Enumerable
       new_array << yield(value)
     end
     new_array
-  end 
-
-  #p [2, 4, 3].select
+  end  
 
   def my_inject(acc = nil, arg = nil)
     if acc == nil || acc.is_a?(Symbol)
@@ -82,8 +78,10 @@ module Enumerable
       i += 1
     end
     counter
-  end 
+  end
 
-  p (5..10).my_inject(4) { |prod, n| prod * n }
+end
 
+def multiply_els(arr)
+    arr.my_inject { |x, y| x * y }
 end
