@@ -4,9 +4,7 @@ module Enumerable
     self.size.times do |i|      
       yield self.to_a[i]      
     end
-  end 
-
-  #p (2..4).my_each
+  end
 
   def my_each_with_index
     return enum_for(:my_each_with_index) unless block_given?
@@ -24,13 +22,15 @@ module Enumerable
     new_array
   end  
 
-  def my_all?
+  def my_all?(arg = nil)
     is_all_true = true
     my_each do |value|
-      is_all_true = false unless yield value
+      block_given? ? (is_all_true = false unless yield value) : (is_all_true = false unless value == arg)
     end
     is_all_true
   end
+
+  p [].my_all?
 
   def my_any?
     is_all_true = false
@@ -84,6 +84,6 @@ module Enumerable
     counter
   end 
 
-  puts (2..4).my_inject(2, :*)
+  p (5..10).my_inject(4) { |prod, n| prod * n }
 
 end
