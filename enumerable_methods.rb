@@ -67,22 +67,23 @@ module Enumerable
 
   #p [2, 4, 3].select
 
-  def my_inject(acc = nil)
-    if acc == nil 
-      arr = self.drop(1)
+  def my_inject(acc = nil, arg = nil)
+    if acc == nil || acc.is_a?(Symbol)
+      arr = self.drop(1).to_a
       counter = self.to_a[0]
     else
       counter = acc
+      acc = arg
       arr = self.to_a
     end
     i = 0    
     while i < arr.length do      
-      counter = yield(counter, arr.to_a[i])
+      block_given? ? counter = yield(counter, arr[i]) : counter = counter.send(acc, arr[i])
       i += 1
     end
     counter
   end 
 
-  puts (2..4).my_inject(2) { |x, y| x + y }  
+  puts (2..4).my_inject(2, :*)
 
 end
