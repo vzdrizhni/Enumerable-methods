@@ -1,5 +1,5 @@
-# Bubble Sort
-Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order,until the list is sorted.
+# Enumerable methods
+Enumerable is a module in Ruby that provides many methods that can help with traversal, transforming, sorting, and filtering. Any class that can implement the #each method can use Enumerable methods, which will then yield each item in the collection to a block.
 
 ## Built With
 
@@ -33,15 +33,9 @@ To get a local copy up and running follow these simple example steps.
 - Run rubocop to fix linters errors
 
 
-## Authors
+## Author
 
-👤 Adewale Adeshola
-
-- Github: [@githubhandle](https://github.com/Eshy10)
-- Twitter: [@twitterhandle](https://twitter.com/AdesholaAdewal6?s=09)
-- Linkedin: [linkedin](https://www.linkedin.com/in/adewale-adeshola-b0b581139/)
-
-👤 Roman Nikolaev 
+👤 Roman Nikolaev
 
 - Github: [@githubhandle](https://github.com/vzdrizhni)
 - Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
