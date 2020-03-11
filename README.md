@@ -13,7 +13,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-- Install ruby on your local machine
+- Install ruby on your local machine.
 
 ### Setup
 
