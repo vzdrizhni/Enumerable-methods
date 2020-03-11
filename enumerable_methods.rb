@@ -54,14 +54,22 @@ module Enumerable
     counter
   end
 
-  def my_map
+  def my_map(proc = nil)
     return enum_for(:map) unless block_given?
     new_array = []
-    my_each do |value|
-      new_array << yield(value)
-    end
+    if proc == nil
+      my_each do |value|
+        new_array << yield(value)
+      end
+    else
+      my_each do |value|
+        new_array << proc.call(value)
+      end
+    end  
     new_array
-  end  
+  end
+
+  puts (2..4).map(&:to_s)
 
   def my_inject(acc = nil, arg = nil)
     if acc == nil || acc.is_a?(Symbol)
@@ -80,8 +88,8 @@ module Enumerable
     counter
   end
 
-end
-
-def multiply_els(arr)
+  def multiply_els(arr)
     arr.my_inject { |x, y| x * y }
+  end
+
 end
