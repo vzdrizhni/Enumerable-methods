@@ -39,8 +39,6 @@ module Enumerable
     is_all_true
   end
 
-  p [].my_all?
-
   def my_any?(arg = nil)
     is_all_true = false
     my_each do |value|
