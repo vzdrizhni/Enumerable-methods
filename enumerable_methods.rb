@@ -11,7 +11,7 @@ module Enumerable
     return enum_for(:my_each_with_index) unless block_given?
 
     length.times do |i|
-      yield to_a[i], i if block_given?
+      yield to_a[i], i
     end
   end
 
@@ -28,35 +28,51 @@ module Enumerable
   def my_all?(arg = nil)
     is_all_true = true
     my_each do |value|
-      block_given? ? (is_all_true = false unless yield value) : (is_all_true = false unless value == arg)
-    end
-    is_all_true
-  end
-
-  def my_any?(arg = nil)
-    is_all_true = false
-    my_each do |value|
-      block_given? ? (is_all_true = true if yield value) : (is_all_true = true if value == arg)
-    end
-    is_all_true
-  end
-
-  def my_none?(arg = true)
-    is_all_true = true
-    my_each do |value|
       if block_given?
-        (is_all_true = false if yield value)
+        is_all_true = false unless yield value
+      elsif arg.nil?
+        is_all_true = false unless value
       else
-        (is_all_true = false if value == arg || value.class == arg || value == true)
+        is_all_true = false unless arg === value
       end
     end
     is_all_true
   end
 
-  def my_count
+  p [].my_all?
+
+  def my_any?(arg = nil)
+    is_all_true = false
+    my_each do |value|
+      if block_given?
+        is_all_true = true if yield value
+      elsif arg.nil?
+        is_all_true = true if value
+      elsif arg === value
+        is_all_true = true
+      end
+    end
+    is_all_true
+  end
+
+  def my_none?(arg = nil)
+    is_all_true = true
+    my_each do |value|
+      if block_given?
+        is_all_true = false if yield value
+      elsif arg.nil?
+        is_all_true = false if value
+      elsif arg === value
+        is_all_true = false
+      end
+    end
+    is_all_true
+  end
+
+  def my_count(arg = nil)
     counter = 0
     my_each do |value|
-      counter += 1 if yield value
+      block_given? ? (counter += 1 if yield value) : (counter += 1 if value == arg || arg.nil?)
     end
     counter
   end
