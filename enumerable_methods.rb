@@ -25,6 +25,8 @@ module Enumerable
     new_array
   end
 
+  # rubocop:disable Style/CaseEquality
+
   def my_all?(arg = nil)
     is_all_true = true
     my_each do |value|
@@ -66,6 +68,8 @@ module Enumerable
     end
     is_all_true
   end
+
+  # rubocop:enable Style/CaseEquality
 
   def my_count(arg = nil)
     counter = 0
