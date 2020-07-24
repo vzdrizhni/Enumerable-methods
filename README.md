@@ -7,10 +7,6 @@ Enumerable is a module in Ruby that provides many methods that can help with tra
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
 - Install ruby on your local machine.
